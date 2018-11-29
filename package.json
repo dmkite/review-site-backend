@@ -12,14 +12,18 @@
   "author": "Scott Hurlow <scott.hurlow@galvanize.com>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.17.2",
     "boom": "^5.2.0",
+    "cors": "^2.8.5",
     "express": "^4.15.3",
+    "jsonwebtoken": "^8.4.0",
     "knex": "^0.13.0",
-    "morgan": "^1.8.2",
+    "morgan": "^1.9.1",
     "pg": "^7.0.2"
   },
   "devDependencies": {
+    "dotenv": "^6.1.0",
     "nodemon": "^1.12.1"
   }
 }

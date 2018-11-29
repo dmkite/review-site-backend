@@ -1,0 +1,38 @@
+const knex = require('../db/knex')
+const userModel = require('../models/users')
+
+
+
+function create(title, text, rating, snack_id, user_id){
+    return userModel.getOneFrom('users', user_id)
+    .then(result => {
+        if(!result) throw {status:400, message: "Bad request"}
+        return userModel.getOneFrom('snacks', snack_id)
+    })
+    .then(result =>{
+        if (!result) throw { status: 400, message: "Bad request" }
+        return knex('reviews')
+        .where({snack_id, user_id})
+    })
+    .then(([review]) => {
+        if (review) throw { status: 400, message: "You have already reviewed this item" }
+        return knex('reviews')
+        .insert({title, text, rating, snack_id, user_id})
+        .returning('*')
+    })
+}
+
+function update(title, text, rating, snack_id, user_id){
+    return knex('reviews')
+    .where({snack_id, user_id})
+    .then(review => {
+        if(!review) throw {status:400, message: "Bad request"}
+        return knex('reviews')
+        .where({ snack_id, user_id })
+        .update({ title, text, rating })
+        .returning('*')
+    })
+    
+}
+
+module.exports = {create, update}

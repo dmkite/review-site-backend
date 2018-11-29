@@ -3,12 +3,27 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const path = require('path');
-
+const cors = require('cors');
 const app = express();
+
+if(process.env.NODE_ENV !== 'production') require('dotenv').load()
+
+app.use(cors())
 app.use(bodyParser.json());
+app.use(morgan('dev'))
 
 const snacks = require('./routes/snacks');
 app.use('/api', snacks);
+
+app.use('/users', require('./routes/users'))
+
+app.use('/auth', require('./routes/auth'))
+
+///////////////////////////////////////////////////////////////////////////////
+//  Protected
+///////////////////////////////////////////////////////////////////////////////
+
+app.use('/reviews/:id', require('./routes/reviews'))
 
 app.use((req, res) => {
   const status = 404;
