@@ -3,7 +3,11 @@ const router = express.Router()
 const reviewCtrl = require('../controllers/reviews')
 const authCtrl = require('../controllers/auth')
 
-router.post('/', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.create)
-router.put('/', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.update)
+router.get('/count', reviewCtrl.getCount)
+
+router.post('/:id', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.create)
+router.put('/:id', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.update)
+
+
 
 module.exports = router

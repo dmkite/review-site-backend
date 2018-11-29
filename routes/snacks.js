@@ -21,6 +21,14 @@ router.get('/snacks/:id', (req, res, next) => {
     .catch(err => next(err))
 })
 
+router.get('/snacks/:id/reviews', (req, res, next) => {
+  const id = req.params.id
+  knex('reviews')
+  .where('snack_id', id)
+  .count()
+  .then(result => result)
+  .catch(err => next(err))
+})
 
 
 module.exports = router;

@@ -23,7 +23,7 @@ app.use('/auth', require('./routes/auth'))
 //  Protected
 ///////////////////////////////////////////////////////////////////////////////
 
-app.use('/reviews/:id', require('./routes/reviews'))
+app.use('/reviews', require('./routes/reviews'))
 
 app.use((req, res) => {
   const status = 404;

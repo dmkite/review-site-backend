@@ -1,5 +1,14 @@
 const reviewModel = require('../models/reviews')
 
+
+function getCount(req, res, next){
+    return reviewModel.getCount()
+    .then(result => {
+        res.status(200).send({data: result})
+    })
+    .catch(err => next(err))
+}
+
 function create(req, res, next){
     const {title, text, rating, snack_id, user_id} = req.body
     if(!title || !text || !rating || !snack_id || !user_id) return next({status:400, message: 'Missing information'})
@@ -19,4 +28,4 @@ function update(req, res, next) {
         })
         .catch(err => next(err))
  }
-module.exports = {create, update}
+module.exports = {create, update, getCount}

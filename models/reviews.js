@@ -1,7 +1,13 @@
 const knex = require('../db/knex')
 const userModel = require('../models/users')
 
-
+function getCount(){
+    return knex('reviews')
+    .select('snack_id')
+    .count('*')
+    .groupBy('snack_id')
+    //select snack_id, count(*) from reviews group by snack_id
+}
 
 function create(title, text, rating, snack_id, user_id){
     return userModel.getOneFrom('users', user_id)
@@ -35,4 +41,4 @@ function update(title, text, rating, snack_id, user_id){
     
 }
 
-module.exports = {create, update}
+module.exports = {create, update, getCount}
