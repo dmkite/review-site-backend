@@ -2,14 +2,13 @@ const jwt = require('jsonwebtoken')
 const authModel = require('../models/auth')
 
 function login(req, res, next){
-    
-    console.log(req.body)
     const {email, password} = req.body
    
     if(!email || !password) return next({error: 400, message:'Something\'s missing...'})
    
     return authModel.tryLogin(email, password)
     .then(result => {
+        console.log('this is the result going into the payload!!!!!!!!!!!!!11111', result)
         const payload = {
             exp: (Date.now() / 1000) + 3600,
             sub: result,
@@ -23,7 +22,7 @@ function login(req, res, next){
 
 
 function isAuthenticated(req,res, next){
-    if(!req.headers.authorized) return next({status:401, message: "Unauthorized"})
+    if(!req.headers.authorization) return next({status:401, message: "Unauthorized"})
     const [, token] = req.headers.authorization.split(' ')
 
     jwt.verify(token, process.env.SECRET, (err, payload) => {
@@ -36,7 +35,7 @@ function isAuthenticated(req,res, next){
 }
 
 function getStatus(req, res, next) {
-    res.status(200).send({id: req.claim.sub.id})
+    res.status(200).send({user: req.claim.sub})
 }
 
 function confirmReq(req, res, next){

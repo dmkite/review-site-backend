@@ -1,5 +1,14 @@
 const userModel = require('../models/users')
 
+function getReviewsByUser(req, res, next){
+    const id = req.params.id
+    return userModel.getReviewsByUser(id)
+    .then(result => {
+        res.status(200).send({data:result})
+    })
+    .catch(err => next(err))
+}
+
 function create(req, res, next){
     const {first_name, last_name, email, password} = req.body
     
@@ -10,4 +19,6 @@ function create(req, res, next){
     .catch(err => next({status:400, message: 'Try something else'}))
 }
 
-module.exports = {create}
+
+
+module.exports = {create, getReviewsByUser}

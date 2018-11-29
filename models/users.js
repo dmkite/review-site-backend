@@ -9,6 +9,12 @@ function getOneFrom(table, id) {
         .where('id', id)
         // .first()
 }
+function getReviewsByUser(id) {
+    return knex
+        .select('id')
+        .from('reviews')
+        .where('user_id', id)
+}
 
 function checkForUser(email){
     return knex('users')
@@ -34,4 +40,4 @@ function create(first_name, last_name, email, password){
     })
 }
 
-module.exports = {create, checkForUser, getOneFrom}
+module.exports = {create, checkForUser, getOneFrom, getReviewsByUser}
