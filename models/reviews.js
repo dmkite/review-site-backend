@@ -28,9 +28,9 @@ function create(title, text, rating, snack_id, user_id){
     })
 }
 
-function update(title, text, rating, snack_id, user_id){
+function update(id, title, text, rating, snack_id, user_id){
     return knex('reviews')
-    .where({snack_id, user_id})
+    .where({id})
     .then(review => {
         if(!review) throw {status:400, message: "Bad request"}
         return knex('reviews')
@@ -38,7 +38,13 @@ function update(title, text, rating, snack_id, user_id){
         .update({ title, text, rating })
         .returning('*')
     })
-    
 }
 
-module.exports = {create, update, getCount}
+function remove(id){
+    return knex('reviews')
+    .where('id', id)
+    .del()
+    .returning('*')
+}
+
+module.exports = {create, update, getCount, remove}

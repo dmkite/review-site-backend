@@ -8,7 +8,6 @@ function login(req, res, next){
    
     return authModel.tryLogin(email, password)
     .then(result => {
-        console.log('this is the result going into the payload!!!!!!!!!!!!!11111', result)
         const payload = {
             exp: (Date.now() / 1000) + 3600,
             sub: result,
@@ -22,6 +21,7 @@ function login(req, res, next){
 
 
 function isAuthenticated(req,res, next){
+    
     if(!req.headers.authorization) return next({status:401, message: "Unauthorized"})
     const [, token] = req.headers.authorization.split(' ')
 
@@ -40,6 +40,7 @@ function getStatus(req, res, next) {
 
 function confirmReq(req, res, next){
     if(req.claim.sub.id != req.params.id) return next({status:401, message: "Unauthorized"})
+    next()
 }
 
 module.exports = {login, isAuthenticated, getStatus, confirmReq}

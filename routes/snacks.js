@@ -25,10 +25,22 @@ router.get('/snacks/:id/reviews', (req, res, next) => {
   const id = req.params.id
   knex('reviews')
   .where('snack_id', id)
-  .count()
-  .then(result => result)
+  .innerJoin('users', 'users.id', 'reviews.user_id')
+  // .count()
+  .then(result => {
+    console.log(result)
+    result.forEach(review => {
+      delete review.hashed_password
+      delete review.email
+      delete review.last_name
+      // delete review.user_id
+    })
+    res.send(result)
+  })
   .catch(err => next(err))
 })
+
+
 
 
 module.exports = router;

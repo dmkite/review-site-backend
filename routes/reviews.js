@@ -7,6 +7,7 @@ router.get('/count', reviewCtrl.getCount)
 
 router.post('/:id', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.create)
 router.put('/:id', authCtrl.isAuthenticated, authCtrl.confirmReq, reviewCtrl.update)
+router.delete('/:id', authCtrl.isAuthenticated, reviewCtrl.remove)
 
 
 

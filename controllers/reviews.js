@@ -20,12 +20,22 @@ function create(req, res, next){
 }
 
 function update(req, res, next) {
-    const {title, text, rating, snack_id, user_id} = req.body
+    const {id, title, text, rating, snack_id, user_id} = req.body
     if (!title || !text || !rating || !snack_id || !user_id) return next({ status: 400, message: 'Missing information' })
-    return reviewModel.update(title, text, rating, snack_id, user_id)
+    return reviewModel.update(id, title, text, rating, snack_id, user_id)
         .then(review => {
             res.status(201).send({ data: review })
         })
         .catch(err => next(err))
  }
-module.exports = {create, update, getCount}
+
+ function remove(req, res, next){
+     const id = req.params.id
+     return reviewModel.remove(id)
+     .then(result => {
+         res.status(200).status(result)
+     })
+     .catch(err => next(err))
+ }
+
+module.exports = {create, update, getCount, remove}
