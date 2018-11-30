@@ -29,9 +29,8 @@ router.get('/snacks/:id/reviews', (req, res, next) => {
   // .from('users', 'reviews')
   // .where('snack_id', id)
   // .count()
-  knex.raw('SELECT reviews.id, reviews.rating, reviews.title, reviews.snack_id, reviews.text, users.first_name FROM reviews INNER JOIN users ON users.id = reviews.user_id')
+  knex.raw('SELECT reviews.id, reviews.rating, reviews.title, reviews.snack_id, reviews.text, reviews.user_id, users.first_name FROM reviews INNER JOIN users ON users.id = reviews.user_id')
   .then(result => {
-    console.log(result)
     // result.forEach(review => {
     //   delete review.hashed_password
     //   delete review.email

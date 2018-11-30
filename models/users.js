@@ -12,7 +12,6 @@ function getOneFrom(table, id) {
 
 function getReviewsByUser(userId) {
     return knex('reviews')
-        // .select('snack_id')
         .where('user_id', userId)
 }
 

@@ -41,7 +41,6 @@ function update(id, title, text, rating, snack_id, user_id){
 }
 
 function remove(id){
-    console.log(id)
     return knex('reviews')
     .del()
     .where('id', id)

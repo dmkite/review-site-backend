@@ -10,7 +10,6 @@ function getCount(req, res, next){
 }
 
 function create(req, res, next){
-    console.log(req.body, '==================================================')
     const {title, text, rating, snack_id, user_id} = req.body
     if(!title || !text || !rating || !snack_id || !user_id) return next({status:400, message: 'Missing information'})
     return reviewModel.create(title, text, rating, snack_id, user_id)
@@ -31,11 +30,9 @@ function update(req, res, next) {
  }
 
  function remove(req, res, next){
-     console.log('getting to controller')
      const id = req.params.id
      return reviewModel.remove(id)
      .then(result => {
-         console.log(result)
          res.status(200).status(result)
      })
      .catch(err => next(err))
