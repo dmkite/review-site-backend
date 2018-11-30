@@ -9,11 +9,11 @@ function getOneFrom(table, id) {
         .where('id', id)
         // .first()
 }
-function getReviewsByUser(id) {
-    return knex
-        .select('snack_id')
-        .from('reviews')
-        .where('user_id', id)
+
+function getReviewsByUser(userId) {
+    return knex('reviews')
+        // .select('snack_id')
+        .where('user_id', userId)
 }
 
 function checkForUser(email){

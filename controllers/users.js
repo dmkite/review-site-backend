@@ -4,6 +4,7 @@ function getReviewsByUser(req, res, next){
     const id = req.params.id
     return userModel.getReviewsByUser(id)
     .then(result => {
+        console.log(result, '**********************************************')
         res.status(200).send({data:result})
     })
     .catch(err => next(err))
