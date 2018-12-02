@@ -5,6 +5,7 @@ function getCount(){
     return knex('reviews')
     .select('snack_id')
     .count('*')
+    .avg('rating')
     .groupBy('snack_id')
 }
 

@@ -4,6 +4,7 @@ const reviewModel = require('../models/reviews')
 function getCount(req, res, next){
     return reviewModel.getCount()
     .then(result => {
+        console.log(result)
         res.status(200).send({data: result})
     })
     .catch(err => next(err))
