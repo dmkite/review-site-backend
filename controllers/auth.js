@@ -21,7 +21,6 @@ function login(req, res, next){
 
 
 function isAuthenticated(req,res, next){
-    
     if(!req.headers.authorization) return next({status:401, message: "Unauthorized"})
     const [, token] = req.headers.authorization.split(' ')
 

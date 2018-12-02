@@ -33,7 +33,7 @@ function update(req, res, next) {
      const id = req.params.id
      return reviewModel.remove(id)
      .then(result => {
-         res.status(200).status(result)
+         res.status(200).send(result)
      })
      .catch(err => next(err))
  }

@@ -6,7 +6,6 @@ function getCount(){
     .select('snack_id')
     .count('*')
     .groupBy('snack_id')
-    //select snack_id, count(*) from reviews group by snack_id
 }
 
 function create(title, text, rating, snack_id, user_id){
