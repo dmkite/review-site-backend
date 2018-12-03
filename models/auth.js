@@ -14,7 +14,6 @@ function tryLogin(email, password){
         })
     })
     
-    
 }
 
 module.exports = {tryLogin}

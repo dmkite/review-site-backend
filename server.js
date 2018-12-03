@@ -32,10 +32,10 @@ app.use((req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
-  console.error(err);
+  console.log(err)
   const status = err.status || 500;
   const message = err.message || 'Something went wrong!';
-  res.status(status).json({ message, status });
+  res.status(status).send({status, message});
 });
 
 const port = process.env.PORT || 3000;

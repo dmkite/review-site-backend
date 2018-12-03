@@ -16,7 +16,10 @@ function login(req, res, next){
         const token = jwt.sign(payload, process.env.SECRET)
         return res.status(200).send({token})
     })
-    .catch(err => next(err))
+    .catch(err => {
+        console.log(err, 'from controller~')
+        return next(err)
+    })
 }
 
 
