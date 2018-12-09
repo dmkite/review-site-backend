@@ -21,6 +21,7 @@ function create(req, res, next){
 }
 
 function update(req, res, next) {
+    console.log(req.body)
     const {id, title, text, rating, snack_id, user_id} = req.body
     if (!title || !text || !rating || !snack_id || !user_id) return next({ status: 400, message: 'Missing information' })
     return reviewModel.update(id, title, text, rating, snack_id, user_id)
